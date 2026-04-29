@@ -6,8 +6,12 @@ import MyForm from './components/MyForm'
 import Channels from "./components/Channels"
 import Users from './components/Users'
 import Chats from './components/Chats'
+import { useState } from 'react'
 
 function App() {
+  const [room, setRoom] = useState(null)
+  const [username, setUsername] = useState("")
+
   useEffect(() => {
     const onConnect = () => {
       console.log("Conectado")
@@ -16,7 +20,7 @@ function App() {
       console.log("Desconectado")
     }
     socket.on('connect', onConnect)
-    socket.off('disconnect', onDisconnect)
+    socket.on('disconnect', onDisconnect)
 
   }, [])
  
@@ -24,11 +28,11 @@ function App() {
     <>
       <h1>Chatify</h1>
       <div style={{ display: "flex", justifyContent: "center", height: "100vh"}}>
-        <Channels />
+        <Channels setRoom={setRoom} setUsername={setUsername}/>
         <div style={{width: "200px", height: "300px", border: "4px solid black",display: "flex", justifyContent: "center",alignItems:"flex-end", flexDirection: "column"}}>
           <Chats/>
         <ManageConnection />
-        <MyForm />
+        <MyForm room={room} username={username} />
         </div>
         <Users/>
       </div>

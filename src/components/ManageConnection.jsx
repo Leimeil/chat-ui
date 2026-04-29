@@ -11,10 +11,11 @@ function ManageConnection() {
     const handleConnection = (con) =>{
         switch (con){
             case "on":
-                socket.on("connect", onConnect)
+                socket.connect
                 break
             case "off":
-                socket.on("disconnect", onDisconnect)
+                socket.disconnect
+                break;
             default:
                 break
         }

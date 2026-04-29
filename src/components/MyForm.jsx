@@ -1,29 +1,40 @@
-import React, {useState} from 'react'
-import {socket} from "../../socket"
+import { useState } from "react"
+import { socket } from "../../socket"
 
-function MyForm() {
-    const [message, setMessage] = useState("");
+function MyForm({ room, username }) {
+  const [message, setMessage] = useState("")
 
-    const handleOnChange = (e) => {
-        setMessage(e.target.value);
-    };
+  const handleClick = (e) => {
+    e.preventDefault()
 
-    const handleClick = (e) => {
-        e.preventDefault()
-        socket.emit("chat message", message)
+    if (!room) {
+      alert("Únete a un room primero")
+      return
     }
+
+    if (!username || username.trim() === "") {
+      alert("Username inválido")
+      return
+    }
+
+    socket.emit("chat message", {
+      content: message,
+      username,
+      room
+    })
+
+    setMessage("")
+  }
 
   return (
     <div>
       <input
-        type= "text"
-        name= "message"
-        value= {message}
-        onChange={handleOnChange}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
       />
       <button onClick={handleClick}>Send</button>
     </div>
   )
 }
 
-export default MyForm
+export default MyForm;
