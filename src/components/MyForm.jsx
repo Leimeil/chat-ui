@@ -34,7 +34,6 @@ function MyForm({ room, username }) {
   }
 
 
-  
   const handleClick = (e) => {
     e.preventDefault()
 
