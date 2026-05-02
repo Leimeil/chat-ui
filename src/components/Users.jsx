@@ -9,6 +9,7 @@ function Users() {
       console.log("Room users received:", usersList)
       setUsers(usersList)
     })
+    
 
     socket.on("user joined", ({ username }) => {
       console.log("User joined:", username)

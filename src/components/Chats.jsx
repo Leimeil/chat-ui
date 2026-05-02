@@ -40,6 +40,7 @@ function Chats({currentUser}) {
               <div>{m.content}</div>
               <span className="timestamp">{formatTime(m.created_at)}</span>
             </div>
+            
           )
         })
       ) : (

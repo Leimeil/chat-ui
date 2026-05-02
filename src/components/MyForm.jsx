@@ -33,6 +33,8 @@ function MyForm({ room, username }) {
     }
   }
 
+
+  
   const handleClick = (e) => {
     e.preventDefault()
 
@@ -45,6 +47,7 @@ function MyForm({ room, username }) {
       alert("Username inválido")
       return
     }
+
 
     console.log("Sending message:", { content: message, username, room })
     socket.emit("chat message", {
